@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: Arial, sans-serif;
+  background: url("background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: -1;
+}
+
+/* SPLASH */
+#splash {
+  position: fixed;
+  inset: 0;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+#splash.fade-out {
+  animation: fadeOut 1s forwards;
+}
+
+/* MAIN */
+.wrapper {
+  text-align: center;
+  animation: fadeIn 1.2s ease;
+}
+
+.hidden {
+  display: none;
+}
+
+/* LOGO */
+.gang-logo {
+  width: 160px;
+  margin-bottom: 15px;
+  filter: drop-shadow(0 0 18px #00aaff);
+  animation: zoomIn 1.3s ease;
+}
+
+/* GLITCH TEXT */
+.glitch {
+  position: relative;
+  font-size: 36px;
+  letter-spacing: 2px;
+}
+.glitch.small { font-size: 28px; }
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+}
+.glitch::before {
+  color: #00aaff;
+  animation: glitchTop 2s infinite;
+}
+.glitch::after {
+  color: #ff0055;
+  animation: glitchBottom 1.5s infinite;
+}
+
+/* TEXT */
+.subtitle {
+  font-size: 14px;
+  margin: 18px 0;
+  opacity: 0.9;
+}
+
+.members {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-bottom: 24px;
+  font-weight: bold;
+}
+
+/* BUTTON */
+.register-btn {
+  display: inline-block;
+  padding: 14px 32px;
+  background: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 30px;
+  box-shadow: 0 0 18px rgba(0,123,255,0.8);
+  animation: pulse 2s infinite;
+}
+
+.register-btn:hover {
+  background: #00aaff;
+}
+
+/* MUSIC BUTTON */
+.music-btn {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 22px;
+  border: none;
+  border-radius: 25px;
+  background: rgba(0,123,255,0.9);
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 0 15px rgba(0,123,255,0.8);
+  cursor: pointer;
+}
+
+/* ANIMATIONS */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeOut {
+  to { opacity: 0; visibility: hidden; }
+}
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(0.7); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 15px rgba(0,123,255,0.6); }
+  50% { box-shadow: 0 0 30px rgba(0,170,255,1); }
+  100% { box-shadow: 0 0 15px rgba(0,123,255,0.6); }
+}
+@keyframes glitchTop {
+  0% { clip-path: inset(0 0 80% 0); }
+  100% { clip-path: inset(0 0 20% 0); }
+}
+@keyframes glitchBottom {
+  0% { clip-path: inset(80% 0 0 0); }
+  100% { clip-path: inset(20% 0 0 0); }
+}
+
+/* MOBILE */
+@media (max-width: 480px) {
+  .gang-logo { width: 130px; }
+  .glitch { font-size: 28px; }
+}
