@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Website Kamu</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <h1>Welcome</h1>
+  <div class="loading-bar">
+    <div id="loadingFill"></div>
+  </div>
+  <p id="tapText" class="hidden">Tap untuk melanjutkan</p>
+</div>
+
+<!-- MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+<div class="music-btn" id="musicBtn">🔊</div>
+
+<!-- MAIN -->
+<div id="main" class="hidden">
+
+  <!-- HAMBURGER -->
+  <div id="hamburger">☰</div>
+
+  <!-- MENU -->
+  <div id="menu" class="menu hidden">
+    <button onclick="openPanel('galleryPanel')">Gallery</button>
+    <button onclick="openPanel('memberPanel')">Member</button>
+    <button onclick="openPanel('adminPanel')">Admin</button>
+  </div>
+
+  <!-- CONTENT -->
+  <h2>Home</h2>
+  <p>Konten utama kamu di sini</p>
+
+</div>
+
+<!-- PANELS -->
+<div id="galleryPanel" class="panel hidden">
+  <h3>Gallery</h3>
+  <div class="gallery">
+    <img src="https://picsum.photos/200?1">
+    <img src="https://picsum.photos/200?2">
+    <img src="https://picsum.photos/200?3">
+  </div>
+  <button onclick="closePanel()">Tutup</button>
+</div>
+
+<div id="memberPanel" class="panel hidden">
+  <h3>Member</h3>
+  <ul id="memberList"></ul>
+  <button onclick="closePanel()">Tutup</button>
+</div>
+
+<div id="adminPanel" class="panel hidden">
+  <h3>Admin</h3>
+  <ul id="adminList"></ul>
+  <button onclick="closePanel()">Tutup</button>
+</div>
+
+<script>
+/* ELEMENT */
+const splash = document.getElementById("splash");
+const main = document.getElementById("main");
+const tapText = document.getElementById("tapText");
+const fill = document.getElementById("loadingFill");
+
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+let playing = false;
+
+/* LOADING */
+let progress = 0;
+const loader = setInterval(() => {
+  progress += 2;
+  fill.style.width = progress + "%";
+  if (progress >= 100) {
+    clearInterval(loader);
+    tapText.classList.remove("hidden");
+  }
+}, 40);
+
+/* TAP */
+splash.addEventListener("click", () => {
+  if (progress < 100) return;
+
+  music.play().then(() => {
+    playing = true;
+    musicBtn.textContent = "⏸";
+  });
+
+  splash.classList.add("fade");
+  setTimeout(() => {
+    splash.style.display = "none";
+    main.classList.remove("hidden");
+  }, 500);
+});
+
+/* MUSIC BTN */
+musicBtn.onclick = () => {
+  if (playing) {
+    music.pause();
+    musicBtn.textContent = "🔊";
+  } else {
+    music.play();
+    musicBtn.textContent = "⏸";
+  }
+  playing = !playing;
+};
+
+/* MENU */
+const hamburger = document.getElementById("hamburger");
+const menu = document.getElementById("menu");
+
+hamburger.onclick = () => {
+  menu.classList.toggle("hidden");
+};
+
+function openPanel(id){
+  menu.classList.add("hidden");
+  const p = document.getElementById(id);
+  p.classList.remove("hidden");
+  setTimeout(()=>p.classList.add("show"),10);
+}
+
+function closePanel(){
+  document.querySelectorAll(".panel").forEach(p=>{
+    p.classList.remove("show");
+    setTimeout(()=>p.classList.add("hidden"),300);
+  });
+}
+<img src="gallery/img1.jpg">
+
+
+/* DATA */
+let members = ["DREXX"];
+let admins = ["RUZZ"];
+
+document.getElementById("memberList").innerHTML =
+  members.map(m=>`<li>${m}</li>`).join("");
+
+document.getElementById("adminList").innerHTML =
+  admins.map(a=>`<li>${a}</li>`).join("");
+</script>
+
+</body>
+</html>

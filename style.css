@@ -1,0 +1,144 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #0f0f0f;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* SPLASH */
+#splash {
+  position: fixed;
+  inset: 0;
+  background: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  z-index: 10;
+}
+
+.loading-bar {
+  width: 200px;
+  height: 6px;
+  background: #333;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+#loadingFill {
+  height: 100%;
+  width: 0%;
+  background: cyan;
+}
+
+#tapText {
+  opacity: 0.8;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  50% { opacity: 0.3; }
+}
+
+.fade {
+  animation: fadeOut 0.5s forwards;
+}
+
+@keyframes fadeOut {
+  to { opacity: 0; }
+}
+
+.hidden {
+  display: none;
+}
+
+/* MUSIC */
+.music-btn {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  font-size: 22px;
+  z-index: 5;
+  cursor: pointer;
+}
+
+/* MAIN */
+#hamburger {
+  font-size: 26px;
+  cursor: pointer;
+  margin: 15px;
+}
+
+/* MENU */
+.menu {
+  position: absolute;
+  top: 60px;
+  left: 15px;
+  background: #1f1f1f;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.menu button {
+  display: block;
+  width: 100%;
+  margin: 5px 0;
+}
+
+/* PANEL */
+.panel {
+  position: fixed;
+  inset: 0;
+  background: #111;
+  padding: 20px;
+  transform: translateY(100%);
+  transition: 0.3s;
+  z-index: 6;
+}
+
+.panel.show {
+  transform: translateY(0);
+}
+
+/* GALLERY */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.gallery img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+body{
+  min-height:100vh;
+  background:
+    linear-gradient(
+      rgba(0,0,0,0.65),
+      rgba(0,0,0,0.65)
+    ),
+    url("background.jpg") no-repeat center center;
+  background-size:cover;
+  background-attachment:fixed;
+  font-family:Arial,sans-serif;
+  color:white;
+}
+
+body{
+  animation:bgMove 25s linear infinite;
+}
+
+@keyframes bgMove{
+  0%{background-position:center top;}
+  50%{background-position:center center;}
+  100%{background-position:center top;}
+}
