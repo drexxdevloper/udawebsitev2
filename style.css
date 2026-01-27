@@ -1,0 +1,127 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background: url("background.jpg") no-repeat center;
+  background-size: cover;
+  font-family: Arial, sans-serif;
+  color: white;
+  overflow-x: hidden;
+}
+
+/* dark overlay */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: -1;
+}
+
+/* SPLASH */
+#splash {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  z-index: 10;
+  cursor: pointer;
+}
+
+#splash .tap {
+  margin-top: 10px;
+  opacity: .7;
+}
+
+.fade-out {
+  animation: fadeOut 1s forwards;
+}
+
+@keyframes fadeOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* MAIN */
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  text-align: center;
+  animation: zoomIn 1s ease;
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes zoomIn {
+  from {
+    transform: scale(.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* LOGO */
+.gang-logo {
+  width: 120px;
+  filter: drop-shadow(0 0 15px #00aaff);
+}
+
+/* TEXT */
+.subtitle {
+  font-size: 14px;
+  opacity: .85;
+}
+
+.members {
+  display: flex;
+  gap: 15px;
+  font-weight: bold;
+}
+
+/* BUTTON */
+.register-btn {
+  margin-top: 15px;
+  padding: 12px 28px;
+  background: #007bff;
+  color: white;
+  text-decoration: none;
+  border-radius: 30px;
+  box-shadow: 0 0 15px #007bff;
+  transition: .3s;
+}
+
+.register-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 25px #00aaff;
+}
+
+/* MUSIC BUTTON */
+.music-btn {
+  position: fixed;
+  bottom: 15px;
+  right: 15px;
+  background: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 25px;
+  box-shadow: 0 0 12px #007bff;
+}
