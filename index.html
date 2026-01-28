@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>UNDEAD ARMY</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <h1 class="glitch">UNDEAD ARMY</h1>
+
+  <div class="loader">
+    <span></span><span></span><span></span>
+  </div>
+
+  <p class="tap hidden" id="tapText">Tap untuk masuk</p>
+</div>
+
+<!-- MAIN -->
+<div class="wrapper hidden" id="main">
+
+  <!-- HAMBURGER -->
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+  <!-- MENU -->
+  <div class="menu hidden" id="menu">
+    <div onclick="openPanel('memberPanel')">📋 List Member</div>
+    <div onclick="openPanel('adminPanel')">🛡️ List Admin</div>
+  </div>
+
+  <img src="logo.png" class="gang-logo">
+
+  <h1 class="glitch small">UNDEAD ARMY</h1>
+
+  <div class="subtitle">
+    KLICK DIBAWAH UNTUK MENDAFTAR GANG UDA
+  </div>
+
+  <a href="https://discord.gg/5jnPYmkYn" class="register-btn">
+    DAFTAR SEKARANG
+  </a>
+</div>
+
+<!-- PANEL MEMBER -->
+<div class="panel hidden" id="memberPanel">
+  <div class="panel-header">
+    <h2>LIST MEMBER</h2>
+    <span onclick="closePanel()">✕</span>
+  </div>
+  <ul class="panel-list">
+    <li>REZZ</li>
+    <li>REYY</li>
+    <li>SAINT</li>
+    <li>VITO</li>
+    <li>LANANG</li>
+    <li>TAMA</li>
+    <li>ALBY</li>
+    <li>METT</li>
+    <li>AKMAL</li>
+    <li>NEXTAR</li>
+    <li>NANN</li>
+    <li>AHOK</li>
+    <li>TIO</li>
+    <li>ABID</li>
+  </ul>
+</div>
+
+<!-- PANEL ADMIN -->
+<div class="panel hidden" id="adminPanel">
+  <div class="panel-header">
+    <h2>LIST ADMIN</h2>
+    <span onclick="closePanel()">✕</span>
+  </div>
+  <ul class="panel-list">
+    <li>RUZZ</li>
+    <li>DREXX</li>
+    <li>HANZZ</li>
+    <li>NOPALL</li>
+  </ul>
+</div>
+
+<!-- AUDIO -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button class="music-btn" id="musicBtn">🔊 MUSIC</button>
+
+<script>
+const splash = document.getElementById("splash");
+const main = document.getElementById("main");
+const tapText = document.getElementById("tapText");
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+const menu = document.getElementById("menu");
+let playing = false;
+
+setTimeout(() => {
+  tapText.classList.remove("hidden");
+}, 2000);
+
+splash.onclick = () => {
+  splash.classList.add("fade-out");
+  main.classList.remove("hidden");
+  music.play().catch(()=>{});
+  playing = true;
+  musicBtn.textContent = "⏸ MUSIC";
+};
+
+musicBtn.onclick = () => {
+  if (!playing) {
+    music.play();
+    musicBtn.textContent = "⏸ MUSIC";
+  } else {
+    music.pause();
+    musicBtn.textContent = "🔊 MUSIC";
+  }
+  playing = !playing;
+};
+
+function toggleMenu() {
+  menu.classList.toggle("hidden");
+}
+
+function openPanel(id) {
+  menu.classList.add("hidden");
+  const panel = document.getElementById(id);
+  panel.classList.remove("hidden");
+  setTimeout(() => panel.classList.add("show"), 10);
+}
+
+function closePanel() {
+  document.querySelectorAll(".panel").forEach(p => {
+    p.classList.remove("show");
+    setTimeout(() => p.classList.add("hidden"), 300);
+  });
+}
+</script>
+
+</body>
+</html>
