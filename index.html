@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>505</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- SPLASH -->
+<div id="splash">
+  <h1 class="glitch loading-text">505</h1>
+  <div class="loading-bar">
+    <div class="loading-progress" id="loadingProgress"></div>
+  </div>
+  <p class="tap hidden" id="tapText">Tap untuk masuk</p>
+</div>
+
+<!-- MAIN -->
+<div class="wrapper hidden" id="main">
+  <div class="hamburger" onclick="toggleMenu()">☰</div>
+
+  <!-- MENU -->
+  <div class="menu hidden" id="menu">
+    <div onclick="openPanel('memberPanel')">📋 List Member</div>
+    <div onclick="openPanel('adminPanel')">🛡️ List Admin</div>
+    <div onclick="openPanel('galleryPanel')">🖼️ Galeri</div>
+    <div onclick="openPanel('kodamPanel')">🧿 Cek Kodam</div>
+    <div onclick="openFish()">🐟 Fish It</div>
+  </div>
+
+  <img src="logo.png" class="gang-logo">
+  <h1 class="glitch small">5 0 5</h1>
+  <div class="subtitle">KLIK DIBAWAH UNTUK MENDAFTAR GANG 505</div>
+  <a href="https://wa.me/6281973529184" class="register-btn">DAFTAR SEKARANG</a>
+</div>
+
+<!-- PANEL KODAM -->
+<div class="panel hidden" id="kodamPanel">
+  <div class="panel-header">
+    <h2>CEK KODAM</h2>
+    <span onclick="closePanel()">✕</span>
+  </div>
+
+  <div style="padding:15px">
+    <input id="namaKodam" placeholder="Masukkan nama" class="input">
+    <button class="register-btn" onclick="cekKodam()">CEK</button>
+    <p id="hasilKodam" style="margin-top:15px;text-align:center"></p>
+  </div>
+</div>
+
+<!-- FISH IT MODAL -->
+<div class="modal hidden" id="fishModal">
+  <div class="modal-box">
+    <span class="close" onclick="closeFish()">✕</span>
+    <img src="fishit.jpg">
+  </div>
+</div>
+
+<!-- AUDIO -->
+<audio id="bgMusic" loop>
+  <source src="music.mp3">
+</audio>
+<button class="music-btn" id="musicBtn">🔊 MUSIC</button>
+
+<script>
+const progress = document.getElementById("loadingProgress");
+const tapText = document.getElementById("tapText");
+const splash = document.getElementById("splash");
+const main = document.getElementById("main");
+const menu = document.getElementById("menu");
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+
+let load = 0, playing = false;
+
+const kodams = [
+ "pipa palaron","tai sapi","tai monyet","kipas angin",
+ "ikan pesut kali ciliwung","sapi sakti","monyet","ayam",
+ "begal","pangeran kerajaan","ratu","babu","maling",
+ "rawa rontek","nyiroro kidul"
+];
+
+setInterval(()=>{
+  if(load<100){
+    load++;
+    progress.style.width = load+"%";
+    if(load===100) tapText.classList.remove("hidden");
+  }
+},40);
+
+splash.onclick=()=>{
+  if(load<100)return;
+  splash.classList.add("fade-out");
+  main.classList.remove("hidden");
+  music.play().catch(()=>{});
+  playing=true;
+  musicBtn.textContent="⏸ MUSIC";
+}
+
+musicBtn.onclick=()=>{
+  playing?music.pause():music.play();
+  playing=!playing;
+  musicBtn.textContent=playing?"⏸ MUSIC":"🔊 MUSIC";
+}
+
+function toggleMenu(){menu.classList.toggle("hidden")}
+function openPanel(id){
+  menu.classList.add("hidden");
+  const p=document.getElementById(id);
+  p.classList.remove("hidden");
+  setTimeout(()=>p.classList.add("show"),10);
+}
+function closePanel(){
+  document.querySelectorAll(".panel").forEach(p=>{
+    p.classList.remove("show");
+    setTimeout(()=>p.classList.add("hidden"),300);
+  })
+}
+
+function cekKodam(){
+  const nama=document.getElementById("namaKodam").value;
+  if(!nama)return;
+  const hasil=kodams[Math.floor(Math.random()*kodams.length)];
+  document.getElementById("hasilKodam").innerText =
+   nama+" memiliki kodam: "+hasil;
+}
+
+function openFish(){
+  menu.classList.add("hidden");
+  document.getElementById("fishModal").classList.remove("hidden");
+}
+function closeFish(){
+  document.getElementById("fishModal").classList.add("hidden");
+}
+</script>
+
+</body>
+</html>
